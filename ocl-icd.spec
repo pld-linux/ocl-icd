@@ -1,19 +1,22 @@
-# TODO: separate OpenCL and ocl-icd devel parts?
 Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
 Name:		ocl-icd
-Version:	2.0.4
-Release:	0.1
+Version:	2.1.3
+Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://forge.imag.fr/frs/?group_id=395
-Source0:	https://forge.imag.fr/frs/download.php/451/%{name}-%{version}.tar.gz
-# Source0-md5:	98fb9c2c4df8f9416fb59acf18368702
+Source0:	https://forge.imag.fr/frs/download.php/524/%{name}-%{version}.tar.gz
+# Source0-md5:	579ba811fe9e229cc21e48406ddba94a
 URL:		https://forge.imag.fr/projects/ocl-icd/
 BuildRequires:	OpenCL-devel >= 1.2
 BuildRequires:	asciidoc
 BuildRequires:	ruby
+BuildRequires:	ruby-modules
 BuildRequires:	xmlto
+# this will be provided by the actual driver, I guess
+#Provides:	OpenCL = 1.2
+Obsoletes:	Mesa-libOpenCL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -21,14 +24,15 @@ This package aims at creating an Open Source alternative to vendor
 specific OpenCL ICD loaders.
 
 %description -l pl.UTF-8
-Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy
-dla specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
+Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy dla
+specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
 
 %package devel
 Summary:	Header file for OpenCL-ICD library
 Summary(pl.UTF-8):	Plik nagłówkowy biblioteki OpenCL-ICD
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	OpenCL-devel >= 1.2
 
 %description devel
 Header file for OpenCL-ICD library.
