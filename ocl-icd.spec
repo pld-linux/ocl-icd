@@ -9,14 +9,13 @@ Group:		Libraries
 Source0:	https://forge.imag.fr/frs/download.php/524/%{name}-%{version}.tar.gz
 # Source0-md5:	579ba811fe9e229cc21e48406ddba94a
 URL:		https://forge.imag.fr/projects/ocl-icd/
-BuildRequires:	OpenCL-devel >= 1.2
+BuildRequires:	khronos-OpenCL-headers >= 1.2
 BuildRequires:	asciidoc
 BuildRequires:	ruby
 BuildRequires:	ruby-modules
 BuildRequires:	xmlto
 # this will be provided by the actual driver, I guess
 #Provides:	OpenCL = 1.2
-Obsoletes:	Mesa-libOpenCL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,15 +26,43 @@ specific OpenCL ICD loaders.
 Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy dla
 specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
 
+%package libOpenCL
+Summary:	OpenCL generic Installable Client Driver support
+Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
+Group:		Libraries
+Suggests:	ocl-icd-driver
+Obsoletes:	Mesa-libOpenCL
+
+%description libOpenCL
+This package aims at creating an Open Source alternative to vendor
+specific OpenCL ICD loaders.
+
+%description libOpenCL -l pl.UTF-8
+Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy dla
+specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
+
 %package devel
-Summary:	Header file for OpenCL-ICD library
-Summary(pl.UTF-8):	Plik nagłówkowy biblioteki OpenCL-ICD
+Summary:	Header file for building OpenCL ICD
+Summary(pl.UTF-8):	Plik nagłówkowy do budowania OpenCL ICD
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	OpenCL-devel >= 1.2
+Requires:	khronos-OpenCL-headers >= 1.2
+Provides:	OpenCL-devel = 1.2
 
 %description devel
-Header file for OpenCL-ICD library.
+Header file for building OpenCL installable client drivers (ICD).
+
+%description devel -l pl.UTF-8
+Plik nagłówkowy do budowania instalowalnych sterowników klienta OpenCL.
+
+%package libOpenCL-devel
+Summary:	Development files for OpenCL library
+Summary(pl.UTF-8):	Plik nagłówkowy biblioteki OpenCL
+Group:		Development/Libraries
+Requires:	%{name}-libOpenCL = %{version}-%{release}
+Requires:	khronos-OpenCL-headers >= 1.2
+
+%description libOpenCL-devel
+Development files for OpenCL library provided by the ocl-icd loader.
 
 %description devel -l pl.UTF-8
 Plik nagłówkowy biblioteki OpenCL-ICD.
@@ -62,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files libOpenCL
 %defattr(644,root,root,755)
 %doc COPYING NEWS README
 %attr(755,root,root) %{_libdir}/libOpenCL.so.*.*.*
@@ -72,7 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libOpenCL.so
 %{_includedir}/ocl_icd.h
-%{_pkgconfigdir}/OpenCL.pc
 %{_pkgconfigdir}/ocl-icd.pc
+
+%files libOpenCL-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libOpenCL.so
+%{_pkgconfigdir}/OpenCL.pc
