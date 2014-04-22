@@ -26,6 +26,19 @@ specific OpenCL ICD loaders.
 Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy dla
 specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
 
+%package devel
+Summary:	Header file for building OpenCL ICD
+Summary(pl.UTF-8):	Plik nagłówkowy do budowania OpenCL ICD
+Group:		Development/Libraries
+Requires:	khronos-OpenCL-headers >= 1.2
+
+%description devel
+Header file for building OpenCL installable client drivers (ICD).
+
+%description devel -l pl.UTF-8
+Plik nagłówkowy do budowania instalowalnych sterowników klienta
+OpenCL.
+
 %package libOpenCL
 Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
@@ -41,38 +54,27 @@ specific OpenCL ICD loaders.
 Ten pakiet to próba stworzenia mającej otwarte źródła alternatywy dla
 specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
 
-%package devel
-Summary:	Header file for building OpenCL ICD
-Summary(pl.UTF-8):	Plik nagłówkowy do budowania OpenCL ICD
-Group:		Development/Libraries
-Requires:	khronos-OpenCL-headers >= 1.2
-Provides:	OpenCL-devel = 1.2
-
-%description devel
-Header file for building OpenCL installable client drivers (ICD).
-
-%description devel -l pl.UTF-8
-Plik nagłówkowy do budowania instalowalnych sterowników klienta OpenCL.
-
 %package libOpenCL-devel
 Summary:	Development files for OpenCL library
-Summary(pl.UTF-8):	Plik nagłówkowy biblioteki OpenCL
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki OpenCL
 Group:		Development/Libraries
 Requires:	%{name}-libOpenCL = %{version}-%{release}
 Requires:	khronos-OpenCL-headers >= 1.2
+Provides:	OpenCL-devel = 1.2
+Obsoletes:	Mesa-libOpenCL-devel
 
 %description libOpenCL-devel
 Development files for OpenCL library provided by the ocl-icd loader.
 
 %description devel -l pl.UTF-8
-Plik nagłówkowy biblioteki OpenCL-ICD.
+Pliki programistyczne biblioteki OpenCL dostarczanej przez ocl-icd.
 
 %prep
 %setup -q
 
 %build
-%configure \
-	%{!?with_static_libs:--disable-static}
+%configure
+
 %{__make}
 
 %install
@@ -89,6 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 %post	libOpenCL -p /sbin/ldconfig
 %postun	libOpenCL -p /sbin/ldconfig
 
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/ocl_icd.h
+%{_pkgconfigdir}/ocl-icd.pc
+
 %files libOpenCL
 %defattr(644,root,root,755)
 %doc COPYING NEWS README
@@ -96,11 +103,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libOpenCL.so.1
 %{_mandir}/man7/libOpenCL.7*
 %{_mandir}/man7/libOpenCL.so.7*
-
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/ocl_icd.h
-%{_pkgconfigdir}/ocl-icd.pc
 
 %files libOpenCL-devel
 %defattr(644,root,root,755)
