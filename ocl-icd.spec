@@ -2,7 +2,7 @@ Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
 Name:		ocl-icd
 Version:	2.1.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: https://forge.imag.fr/frs/?group_id=395
