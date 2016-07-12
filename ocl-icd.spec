@@ -81,9 +81,13 @@ Pliki programistyczne biblioteki OpenCL dostarczanej przez ocl-icd.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	pkgexampledir=%{_examplesdir}/%{name}-%{version}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
+# packaged in man format
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/ocl-icd/html/libOpenCL.html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -95,6 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/ocl_icd.h
 %{_pkgconfigdir}/ocl-icd.pc
+%{_examplesdir}/%{name}-%{version}
 
 %files libOpenCL
 %defattr(644,root,root,755)
