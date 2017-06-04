@@ -1,13 +1,13 @@
 Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
 Name:		ocl-icd
-Version:	2.2.9
+Version:	2.2.11
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://forge.imag.fr/frs/?group_id=395
-Source0:	https://forge.imag.fr/frs/download.php/716/%{name}-%{version}.tar.gz
-# Source0-md5:	7dab1a9531ea79c19a414a9ee229504e
+Source0:	https://forge.imag.fr/frs/download.php/814/ocl-icd-%{version}.tar.gz
+# Source0-md5:	32335dc7dd3ea2a4b994ca87f2f80554
 URL:		https://forge.imag.fr/projects/ocl-icd/
 BuildRequires:	khronos-OpenCL-headers >= 1.2
 BuildRequires:	asciidoc
