@@ -1,21 +1,21 @@
 Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
 Name:		ocl-icd
-Version:	2.2.11
+Version:	2.2.12
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://forge.imag.fr/frs/?group_id=395
-Source0:	https://forge.imag.fr/frs/download.php/814/ocl-icd-%{version}.tar.gz
-# Source0-md5:	32335dc7dd3ea2a4b994ca87f2f80554
+Source0:	https://forge.imag.fr/frs/download.php/836/ocl-icd-%{version}.tar.gz
+# Source0-md5:	7d73f89bfc95a814ac87744489e0c27f
 URL:		https://forge.imag.fr/projects/ocl-icd/
-BuildRequires:	khronos-OpenCL-headers >= 1.2
+BuildRequires:	khronos-OpenCL-headers >= 2.2
 BuildRequires:	asciidoc
 BuildRequires:	ruby
 BuildRequires:	ruby-modules
 BuildRequires:	xmlto
 # this will be provided by the actual driver, I guess
-#Provides:	OpenCL = 1.2
+#Provides:	OpenCL = 2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,7 +30,7 @@ specyficznych dla producenta bibliotek wczytujących ICD OpenCL.
 Summary:	Header file for building OpenCL ICD
 Summary(pl.UTF-8):	Plik nagłówkowy do budowania OpenCL ICD
 Group:		Development/Libraries
-Requires:	khronos-OpenCL-headers >= 1.2
+Requires:	khronos-OpenCL-headers >= 2.2
 
 %description devel
 Header file for building OpenCL installable client drivers (ICD).
@@ -59,8 +59,8 @@ Summary:	Development files for OpenCL library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki OpenCL
 Group:		Development/Libraries
 Requires:	%{name}-libOpenCL = %{version}-%{release}
-Requires:	khronos-OpenCL-headers >= 1.2
-Provides:	OpenCL-devel = 1.2
+Requires:	khronos-OpenCL-headers >= 2.2
+Provides:	OpenCL-devel = 2.2
 Obsoletes:	Mesa-libOpenCL-devel
 
 %description libOpenCL-devel
