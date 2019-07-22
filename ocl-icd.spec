@@ -5,10 +5,12 @@ Version:	2.2.12
 Release:	1
 License:	BSD
 Group:		Libraries
-#Source0Download: https://forge.imag.fr/frs/?group_id=395
+#Source0Download: https://github.com/OCL-dev/ocl-icd/releases
+# TODO: new URL:
+#Source0:	https://github.com/OCL-dev/ocl-icd/archive/v%{version}/%{name}-%{version}.tar.gz
 Source0:	https://forge.imag.fr/frs/download.php/836/ocl-icd-%{version}.tar.gz
 # Source0-md5:	7d73f89bfc95a814ac87744489e0c27f
-URL:		https://forge.imag.fr/projects/ocl-icd/
+URL:		https://github.com/OCL-dev/ocl-icd
 BuildRequires:	khronos-OpenCL-headers >= 2.2
 BuildRequires:	asciidoc
 BuildRequires:	ruby
