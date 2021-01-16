@@ -1,18 +1,19 @@
 Summary:	OpenCL generic Installable Client Driver support
 Summary(pl.UTF-8):	Ogólna obsługa sterowników klienckich (ICD) dla OpenCL
 Name:		ocl-icd
-Version:	2.2.12
+Version:	2.2.14
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/OCL-dev/ocl-icd/releases
-# TODO: new URL:
-#Source0:	https://github.com/OCL-dev/ocl-icd/archive/v%{version}/%{name}-%{version}.tar.gz
-Source0:	https://forge.imag.fr/frs/download.php/836/ocl-icd-%{version}.tar.gz
-# Source0-md5:	7d73f89bfc95a814ac87744489e0c27f
+Source0:	https://github.com/OCL-dev/ocl-icd/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	ef0d426bccf2a795013d3c5794550e5e
 URL:		https://github.com/OCL-dev/ocl-icd
-BuildRequires:	khronos-OpenCL-headers >= 2.2
 BuildRequires:	asciidoc
+BuildRequires:	autoconf >= 2.69
+BuildRequires:	automake >= 1:1.9
+BuildRequires:	khronos-OpenCL-headers >= 2.2
+BuildRequires:	libtool
 BuildRequires:	ruby
 BuildRequires:	ruby-modules
 BuildRequires:	xmlto
@@ -75,6 +76,11 @@ Pliki programistyczne biblioteki OpenCL dostarczanej przez ocl-icd.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 
 %{__make}
